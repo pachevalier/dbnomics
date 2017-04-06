@@ -1,0 +1,19 @@
+---
+title: "dbnomics"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library("dbnomics")
+```
+
+```{r}
+get_serie(slug = "bis-pp-ls-q-au")
+```
+
