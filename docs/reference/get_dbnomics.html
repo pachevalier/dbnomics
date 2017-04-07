@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get serie — get_serie • dbnomics</title>
+<title>Get dbnomics — get_dbnomics • dbnomics</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -69,42 +69,58 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get serie</h1>
+    <h1>Get dbnomics</h1>
     </div>
 
     
-    <p>Get serie</p>
+    <p>Get dbnomics</p>
     
 
-    <pre><span class='fu'>get_serie</span>(<span class='no'>slug</span>)</pre>
+    <pre><span class='fu'>get_dbnomics</span>(<span class='no'>endpoint</span>, <span class='no'>slug</span>, <span class='no'>suffix</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
+      <dt>endpoint</dt>
+      <dd>a string either &quot;providers&quot;, &quot;datasets&quot; or &quot;series&quot;</dd>
       <dt>slug</dt>
-      <dd>a string</dd>
+      <dd>a string name of the slug</dd>
+      <dt>suffix</dt>
+      <dd>a suffix. For instance &quot;values&quot;</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tibble</p>
+    <p>a get request</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>get_serie</span>(<span class='kw'>slug</span> <span class='kw'>=</span> <span class='st'>"bis-pp-ls-q-au"</span>)</div><div class='output co'>#&gt; <span class='message'>200</span></div><div class='output co'>#&gt; # A tibble: 360 × 2
-#&gt;     period values
-#&gt;      &lt;chr&gt;  &lt;chr&gt;
-#&gt; 1  1927-Q1       
-#&gt; 2  1927-Q2       
-#&gt; 3  1927-Q3       
-#&gt; 4  1927-Q4       
-#&gt; 5  1928-Q1       
-#&gt; 6  1928-Q2       
-#&gt; 7  1928-Q3       
-#&gt; 8  1928-Q4       
-#&gt; 9  1929-Q1       
-#&gt; 10 1929-Q2       
-#&gt; # ... with 350 more rows</div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'>
+<span class='fu'>get_dbnomics</span>(<span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='st'>"series"</span>, <span class='kw'>slug</span> <span class='kw'>=</span> <span class='st'>"bis-pp-ls-q-au"</span>)</div><div class='output co'>#&gt; <span class='message'>200</span></div><div class='output co'>#&gt; Response [https://api.db.nomics.world/api/v1/json/series/bis-pp-ls-q-au]
+#&gt;   Date: 2017-04-07 07:56
+#&gt;   Status: 200
+#&gt;   Content-Type: application/json
+#&gt;   Size: 21.8 kB
+#&gt; </div><div class='input'>
+
+<span class='co'># https://api.db.nomics.world/api/v1/json/datasets/insee-cna-2010-dep-apu/values</span>
+<span class='fu'>get_dbnomics</span>(
+<span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='st'>"datasets"</span>,
+<span class='kw'>slug</span> <span class='kw'>=</span> <span class='st'>"insee-cna-2010-dep-apu"</span>,
+<span class='kw'>suffix</span> <span class='kw'>=</span> <span class='st'>"values"</span>)</div><div class='output co'>#&gt; <span class='message'>200</span></div><div class='output co'>#&gt; Response [https://api.db.nomics.world/api/v1/json/datasets/insee-cna-2010-dep-apu/values]
+#&gt;   Date: 2017-04-07 07:56
+#&gt;   Status: 200
+#&gt;   Content-Type: application/json
+#&gt;   Size: 69.4 kB
+#&gt; </div><div class='input'>
+<span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># library("magrittr")</span>
+<span class='co'># get_dbnomics(</span>
+<span class='co'># endpoint = "datasets",</span>
+<span class='co'># slug = "insee-cna-2010-dep-apu",</span>
+<span class='co'># suffix = "values") %&gt;%</span>
+<span class='co'># httr::content() %&gt;%</span>
+<span class='co'># magrittr::extract2("data")</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

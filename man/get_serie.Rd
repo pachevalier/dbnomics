@@ -7,7 +7,7 @@
 get_serie(slug)
 }
 \arguments{
-\item{slug}{}
+\item{slug}{a string}
 }
 \value{
 a tibble
